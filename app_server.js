@@ -37,6 +37,6 @@ app.use(routerQuestion);
 app.use(routerRules);
 app.use(routerParticipant);
 
-app.listen(3000, () => { console.log("API rodando com Sucesso!") });
+const PORT = process.env.PORT || 3000;
 
-export default app;
+app.listen(3000, () => { console.log(`API rodando com Sucesso! na porta: ${PORT}`) });
