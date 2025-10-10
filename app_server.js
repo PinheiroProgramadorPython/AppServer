@@ -41,4 +41,4 @@ app.use(routerParticipant);
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(3000, () => { console.log(`API rodando com Sucesso! na porta: ${PORT}`) });
+app.listen(PORT, () => { console.log(`API rodando com Sucesso! na porta: ${PORT}`) });
