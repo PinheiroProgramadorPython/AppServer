@@ -1,18 +1,16 @@
 import express from "express";
 import premioSchema from "../models/premio.js";
-import cloudinary from "../config/cloudinary.js";
 import multer from "multer";
 import path from "path";
 
 
-// const storage = multer.diskStorage({
-//     destination: "public/uploads",
-//     filename: (req, file, cb) => {
-//         cb(null, Date.now() + path.extname(file.originalname));
-//     }
-// });
-
-const upload = multer({ storage: multer.memoryStorage() });
+const storage = multer.diskStorage({
+    destination: "public/uploads",
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname));
+    }
+});
+const upload = multer({ storage });
 
 const router = express.Router();
 
@@ -27,19 +25,7 @@ router.get("/premios", async (req, resp) => {
 
 router.post("/premios", upload.single("image"), async (req, resp) => {
     try {
-        const uploadResult = await new Promise((resolve, reject) => {
-            const stream = cloudinary.uploader.upload_stream(
-                { folder: "premios" }, // pasta no Cloudinary
-                (error, result) => {
-                    if (error) reject(error);
-                    else resolve(result);
-                }
-            );
-            streamifier.createReadStream(req.file.buffer).pipe(stream);
-        });
-
-
-        const imageUrl = uploadResult;
+        const imageUrl = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
         const premio = await premioSchema.create({ ...req.body, image: imageUrl });
         resp.json(premio).status(200);
     } catch (error) {
