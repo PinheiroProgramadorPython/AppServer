@@ -1,16 +1,25 @@
 import express from "express";
 import premioSchema from "../models/premio.js";
-import multer from "multer";
-import path from "path";
+// import multer from "multer";
+// import path from "path";
 
 
-const storage = multer.diskStorage({
-    destination: "public/uploads",
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname));
-    }
-});
-const upload = multer({ storage });
+// const storage = multer.diskStorage({
+//     destination: "public/uploads",
+//     filename: (req, file, cb) => {
+//         cb(null, Date.now() + path.extname(file.originalname));
+//     }
+// });
+// const upload = multer({ storage });
+
+// let imageUrl;
+// if (req.file) {
+//             imageUrl = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
+//         } else {
+//             imageUrl = req.body.image;
+//         }
+
+// const imageUrl = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
 
 const router = express.Router();
 
@@ -23,26 +32,19 @@ router.get("/premios", async (req, resp) => {
     }
 });
 
-router.post("/premios", upload.single("image"), async (req, resp) => {
+
+router.post("/premios", async (req, resp) => {
     try {
-        const imageUrl = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
-        const premio = await premioSchema.create({ ...req.body, image: imageUrl });
+        const premio = await premioSchema.create(req.body);
         resp.json(premio).status(200);
     } catch (error) {
         resp.json({ error: error, message: "Request Failure" }).status(400);
     }
 });
 
-router.put("/premios/:id", upload.single("image"), async (req, resp) => {
-    let imageUrl;
+router.put("/premios/:id", async (req, resp) => {
     try {
-        if (req.file) {
-            imageUrl = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
-        } else {
-            imageUrl = req.body.image;
-        }
-
-        const premio = await premioSchema.findOneAndUpdate({ id: req.params.id }, { ...req.body, image: imageUrl }, { new: true });
+        const premio = await premioSchema.findOneAndUpdate({ id: req.params.id }, req.body, { new: true });
         resp.json(premio).status(200);
     } catch (error) {
         resp.json({ error: error, message: "Request Failure" }).status(400);

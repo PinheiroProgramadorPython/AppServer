@@ -5,6 +5,7 @@ import routerAwards from "./routes/awards.js";
 import routerQuestion from "./routes/questions.js";
 import routerRules from "./routes/rules.js";
 import routerParticipant from "./routes/participants.js";
+import routeUpload from "./routes/uploads.js";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
@@ -21,15 +22,11 @@ connectMongoDB();
 
 const app = express()
 
-app.set("trust proxy", true);
-
 app.use(cors({
     origin: "*",
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ["Content-Type"]
 }));
-
-app.use("/uploads", express.static("public/uploads"));
 
 app.use(express.json());
 app.use(routerWinners);
@@ -38,7 +35,8 @@ app.use(routerAwards);
 app.use(routerQuestion);
 app.use(routerRules);
 app.use(routerParticipant);
+app.use(routeUpload);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 
-app.listen(PORT, () => { console.log(`API rodando com Sucesso! na porta: ${PORT}`) });
+app.listen(PORT, () => { console.log(`API rodando com Sucesso! na Porta: ${PORT}`) });
