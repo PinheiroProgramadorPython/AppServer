@@ -30,7 +30,8 @@ const userSchema = new mongoose.Schema({
     },
     admin: {
         type: Boolean,
-        required: true
+        required: true,
+        default: false
     },
     senha: {
         type: String,

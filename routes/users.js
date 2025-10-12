@@ -2,6 +2,9 @@ import express from "express";
 import userSchema from "../models/usuario.js";
 
 
+const TOKEN_ADMIN = process.env.TOKEN_ADMIN;
+
+
 const router = express.Router();
 
 router.get("/usuarios", async (req, resp) => {
@@ -13,10 +16,17 @@ router.get("/usuarios", async (req, resp) => {
     }
 });
 
-router.post("/usuarios", async (req, resp) => {
+router.post("/usuarios/criarconta", async (req, resp) => {
     try {
-        const usuario = await userSchema.create(req.body);
+        const { name, lastname, email, whatsapp, senha, tokenAdmin } = req.body;
+
+        const isAdmin = tokenAdmin === TOKEN_ADMIN;
+
+        const usuario = await userSchema.create({
+            name, lastname, email, whatsapp, senha, admin: isAdmin
+        });
         resp.status(200).json(usuario);
+
     } catch (error) {
         resp.json({ error: error, message: "Request Failure" }).status(400);
     }
