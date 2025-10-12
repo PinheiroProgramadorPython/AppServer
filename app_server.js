@@ -6,6 +6,7 @@ import routerQuestion from "./routes/questions.js";
 import routerRules from "./routes/rules.js";
 import routerParticipant from "./routes/participants.js";
 import routeUpload from "./routes/uploads.js";
+import routerUsers from "./routes/users.js";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
@@ -36,6 +37,7 @@ app.use(routerQuestion);
 app.use(routerRules);
 app.use(routerParticipant);
 app.use(routeUpload);
+app.use(routerUsers);
 
 const PORT = process.env.PORT;
 
