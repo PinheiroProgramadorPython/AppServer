@@ -16,6 +16,15 @@ router.get("/usuarios", async (req, resp) => {
     }
 });
 
+router.get("/usuarios/:id", async (req, resp) => {
+    try {
+        const usuario = await userSchema.findOne({ id: req.params.id });
+        resp.status(200).json(usuario);
+    } catch (error) {
+        resp.json({ error: error, message: "Request Failure" }).status(400);
+    }
+});
+
 router.post("/usuarios/criarconta", async (req, resp) => {
     try {
         const { name, lastname, email, whatsapp, senha, tokenAdmin } = req.body;
