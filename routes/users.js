@@ -59,7 +59,7 @@ router.post("/usuarios/login", async (req, resp) => {
             { expiresIn: "1d" }
         );
 
-        resp.status(200).json({ token, usuario: { name: usuario.name, admin: usuario.admin } });
+        resp.status(200).json({ token, usuario: { name: usuario.name, lastname: usuario.lastname, admin: usuario.admin } });
     } catch (error) {
         resp.status(500).json({ error: error, message: "Erro Interno do Servidor" });
     }
