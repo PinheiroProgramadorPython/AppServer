@@ -39,6 +39,4 @@ app.use(routerParticipant);
 app.use(routeUpload);
 app.use(routerUsers);
 
-const PORT = process.env.PORT;
-
-app.listen(PORT, () => { console.log(`API rodando com Sucesso! na Porta: ${PORT}`) });
+export default app;
