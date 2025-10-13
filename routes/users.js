@@ -46,14 +46,14 @@ router.post("/usuarios/criarconta", async (req, resp) => {
 
 router.post("/usuarios/login", async (req, resp) => {
     const { email, senha } = req.body;
-    const usuario = userSchema.findOne({ email });
+    const usuario = await userSchema.findOne({ email });
     if (!usuario) { return resp.status(404).json({ message: "Usuario não foi Encontrado" }); }
 
     const senhaCorreta = await bcrypt.compare(senha, usuario.senha);
     if (!senhaCorreta) { return resp.status(404).json({ message: "Senha esta Incorreta" }); }
 
     const token = jwt.sign(
-        { id: user._id, admin: user.admin },
+        { id: usuario.id, admin: usuario.admin },
         process.env.JWT_SECRET,
         { expiresIn: "1d" }
     );
