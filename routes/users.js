@@ -1,5 +1,8 @@
 import express from "express";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 import userSchema from "../models/usuario.js";
+
 
 
 const TOKEN_ADMIN = process.env.TOKEN_ADMIN;
@@ -39,6 +42,23 @@ router.post("/usuarios/criarconta", async (req, resp) => {
     } catch (error) {
         resp.json({ error: error, message: "Request Failure" }).status(400);
     }
+});
+
+router.post("/usuarios/login", async (req, resp) => {
+    const { email, senha } = req.body;
+    const usuario = userSchema.findOne({ email });
+    if (!usuario) { return resp.status(404).json({ message: "Usuario não foi Encontrado" }); }
+
+    const senhaCorreta = await bcrypt.compare(senha, usuario.senha);
+    if (!senhaCorreta) { return resp.status(404).json({ message: "Senha esta Incorreta" }); }
+
+    const token = jwt.sign(
+        { id: user._id, admin: user.admin },
+        process.env.JWT_SECRET,
+        { expiresIn: "1d" }
+    );
+
+    resp.status(200).json({ token, usuario: { name: usuario.name, admin: usuario.admin } });
 });
 
 router.put("/usuarios/:id", async (req, resp) => {
