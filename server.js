@@ -1,5 +1,5 @@
-import app from "./app";
+import app from "./app/app.js";
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => { console.log(`API rodando com Sucesso! na Porta: ${PORT}`) });

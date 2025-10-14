@@ -1,25 +1,6 @@
 import express from "express";
 import premioSchema from "../models/premio.js";
-// import multer from "multer";
-// import path from "path";
 
-
-// const storage = multer.diskStorage({
-//     destination: "public/uploads",
-//     filename: (req, file, cb) => {
-//         cb(null, Date.now() + path.extname(file.originalname));
-//     }
-// });
-// const upload = multer({ storage });
-
-// let imageUrl;
-// if (req.file) {
-//             imageUrl = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
-//         } else {
-//             imageUrl = req.body.image;
-//         }
-
-// const imageUrl = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
 
 const router = express.Router();
 
