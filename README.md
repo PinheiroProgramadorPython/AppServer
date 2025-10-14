@@ -16,37 +16,7 @@ O backend fornece APIs REST completas para gerenciamento de usuários, ganhadore
 
 ## 📂 Estrutura do Projeto
 
-AppServer/
-│
-├── models/ # Modelos Mongoose
-│ ├── ganhador.js
-│ ├── loja.js
-│ ├── premio.js
-│ ├── pergunta.js
-│ └── usuario.js
-│
-├── routes/ # Rotas principais da API
-│ ├── ganhadoresRoutes.js
-│ ├── lojasRoutes.js
-│ ├── premiosRoutes.js
-│ ├── perguntasRoutes.js
-│ └── usuariosRoutes.js
-│
-├── dataBase/
-│ └── mongoDB.js # Conexão com o banco de dados
-│
-├── tests/ # Testes de rotas (GET)
-│ ├── winners.test.js
-│ ├── stores.test.js
-│ └── questions.test.js
-│
-├── uploads/ # Pasta temporária para imagens
-│
-├── app.js # Configuração principal do servidor
-├── jest.config.js # Configuração do Jest
-├── .env # Variáveis de ambiente
-└── package.json
-
+### AppServer/
 
 ## ⚙️ Configuração do Ambiente
 
@@ -61,14 +31,14 @@ CLOUDINARY_API_KEY=sua_api_key
 CLOUDINARY_API_SECRET=sua_api_secret
 TOKEN_ADMIN=token_secreto_para_criar_admin
 
-## Instalar dependências:
+Instalar dependências:
 npm install
 
-## Executar o servidor local:
+Executar o servidor local:
 npm start
 
-## A API estará disponível em:
+A API estará disponível em:
 http://localhost:8080
 
-## Executar testes:
+Executar testes:
 npm test
