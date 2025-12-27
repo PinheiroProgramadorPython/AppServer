@@ -4,12 +4,13 @@
   "main": "server.js",
   "scripts": {
     "dev": "node --watch .",
-    "test": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules jest --runInBand"
+    "test": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules jest --runInBand",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "Backend da aplicação **Polgo Project**, desenvolvido em **Node.js**, **Express**, **MongoDB (Mongoose)** e **Cloudinary** para upload de imagens.  \r O backend fornece APIs REST completas para gerenciamento de usuários, ganhadores, lojas participantes, prêmios e perguntas (FAQ), além de suporte a autenticação e upload de imagens.",
   "type": "module",
   "dependencies": {
     "bcrypt": "^6.0.0",
@@ -32,5 +33,16 @@
     "setupFilesAfterEnv": [
       "<rootDir>/jest.setup.js"
     ]
-  }
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PinheiroProgramadorPython/AppServer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PinheiroProgramadorPython/AppServer/issues"
+  },
+  "homepage": "https://github.com/PinheiroProgramadorPython/AppServer#readme"
 }
